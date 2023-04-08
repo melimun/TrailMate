@@ -32,6 +32,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "csslib",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/csslib-0.17.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.5",
       "packageUri": "lib/",
@@ -56,8 +62,62 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/eli/development/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///Users/eli/development/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "google_maps",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps-6.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_maps_flutter",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps_flutter-2.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_maps_flutter_android",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps_flutter_android-2.4.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "google_maps_flutter_ios",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps_flutter_ios-2.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "google_maps_flutter_platform_interface",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps_flutter_platform_interface-2.2.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_maps_flutter_web",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/google_maps_flutter_web-0.4.0+7",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "html",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/html-0.15.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -66,6 +126,12 @@
       "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/js-0.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.16"
+    },
+    {
+      "name": "js_wrapping",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/js_wrapping-0.7.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "lints",
@@ -98,6 +164,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "sanitize_html",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/sanitize_html-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///Users/eli/development/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -118,6 +196,12 @@
     {
       "name": "stream_channel",
       "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "stream_transform",
+      "rootUri": "file:///Users/eli/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -152,7 +236,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-03-24T16:32:48.397226Z",
+  "generated": "2023-03-31T17:28:09.340969Z",
   "generator": "pub",
   "generatorVersion": "2.19.1"
 }
