@@ -1,44 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
+import 'package:trailmate/tracking_screen.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  late GoogleMapController mapController;
+  Location location = Location();
+  LocationData? currentLocation;
+  void getCurrentLocation() {
+    //location.enableBackgroundMode(enable: true);
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    location.getLocation().then((location) {
+      setState(() {
+        currentLocation = location;
+        // sourceLocation =
+        //     LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
+        // destination =
+        //     LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Flutter Demo',
       theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.green[700],
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          elevation: 2,
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.0,
-          ),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: const TrackingScreen(),
     );
   }
 }
