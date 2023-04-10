@@ -83,58 +83,77 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: currentLocation == null
-            ? Center(child: Text("Loading"))
+        appBar: AppBar(
+          leading: const Icon(Icons.eco_outlined),
+          title: const Text(
+            'Trail Mate',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: const Color(0xff79a666),
+        ),
+        body:
+            currentLocation == null
+            ? const Center(child: Text("Loading"))
             : GoogleMap(
           myLocationEnabled: true,
           myLocationButtonEnabled: true,
           //tiltGesturesEnabled: true,
           initialCameraPosition: CameraPosition(
             target: sourceLocation,
-
-            // target: LatLng(   //target identify your starting point. it is for current location
-            //     currentLocation!.latitude!, currentLocation!.longitude!),
             zoom: 13.5,
           ),
           polylines: {
             //it is for polyline on your source to destination
             Polyline(
-              polylineId: PolylineId("route"),
+              polylineId: const PolylineId("route"),
               points: polylineCoordinates,
               color: primaryColor,
               width: 6,
             )
           },
           markers: {
-            //Source mean where you from. starting point
             Marker(
-              //icon: sourceIcon,
-              markerId: MarkerId("source"),
+              // icon:
+              markerId: const MarkerId("source"),
               position: sourceLocation,
             ),
             Marker(
               //icon: currentLocationIcon,
-                markerId: MarkerId("currentLocation"),
+                markerId: const MarkerId("currentLocation"),
                 position: LatLng(currentLocation!.latitude!,
                     currentLocation!.longitude!)),
-            Marker(
-              //destination point
-              //icon: destinationIcon,
-              markerId: MarkerId("destination"),
-              position: destination,
-            )
           },
           onMapCreated: (mapController) {
             //change map camera position according to the location change
             _controller.complete(mapController);
           },
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(right:10.0, bottom:110.0),
+          child: FloatingActionButton(
           onPressed: () => _create(),
-          child: const Icon(FontAwesomeIcons.diamondTurnRight),
+          child: _getCustomPin(),
+            backgroundColor: const Color(0xff79a666),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat);
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat);
+  }
+
+  Widget _getCustomPin() {
+    return Center(
+      child: Container(
+        width: 150,
+        child: const Icon(
+          Icons.location_on_rounded,
+          color: Colors.white,
+          size:30.0,
+        ),
+      ),
+    );
   }
 
   Future<void> _create() async {
