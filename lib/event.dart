@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:trailmate/camera.dart';
+
+import 'dart:async';
+import 'dart:io';
+
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
+
 
 class PinEvent extends StatelessWidget {
   @override
@@ -17,13 +26,34 @@ class PinEvent extends StatelessWidget {
         backgroundColor: const Color(0xff79a666),
       ),
       body: Center(
-        child: TextButton(
-          child: Text('Go back'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        child: Column(
+          children: [
+        TextButton(
+        child: const Text('Go back'),
+        onPressed: () {
+          Navigator.pop(context);
+        },),
+            FloatingActionButton(
+              child: const Text('Go To Camera'),
+              onPressed: () {
+                MaterialPageRoute(
+                  builder: (context) => TakePictureScreen(camera: camera),
+                ),
+              },),
+          ],
+
+
+
         ),
       ),
+
+
     );
+
+
+
   }
+
+
+
 }
