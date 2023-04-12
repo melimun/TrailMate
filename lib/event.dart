@@ -1,15 +1,38 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:trailmate/camera.dart';
+import 'package:camera/camera.dart';
 
 import 'dart:async';
 import 'dart:io';
 
-import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
+
 
 
 
 class PinEvent extends StatelessWidget {
+  final typeOfEventsController = TextEditingController();
+
+  final nameController = TextEditingController();
+
+  final descriptionController = TextEditingController();
+
+// Obtain a list of the available cameras on the device.
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    typeOfEventsController.dispose();
+    nameController.dispose();
+    descriptionController.dispose();
+    //super.dispose();
+  }
+
+
+// Get a specific camera from the list of available cameras.
+// inputs, type of events, name of event, description and photo
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +51,15 @@ class PinEvent extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            TextField(decoration: const InputDecoration(labelText: "name of event"),
+              controller: nameController,
+            ),
+            TextField(decoration: const InputDecoration(labelText: "type of event"),
+              controller: typeOfEventsController,
+            ),
+            TextField(decoration: const InputDecoration(labelText: "description"),
+              controller: descriptionController,
+            ),
         TextButton(
         child: const Text('Go back'),
         onPressed: () {
@@ -37,9 +69,10 @@ class PinEvent extends StatelessWidget {
               child: const Text('Go To Camera'),
               onPressed: () {
                 MaterialPageRoute(
-                  builder: (context) => TakePictureScreen(camera: camera),
-                ),
+                  builder: (context) => TakePictureScreen(camera: ),
+                );
               },),
+
           ],
 
 

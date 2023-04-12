@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:trailmate/tracking_screen.dart';
 
-void main() {
+void main() { //try bringing camera from map, tracking screen, event then camera
   runApp(const MyApp());
 }
 
