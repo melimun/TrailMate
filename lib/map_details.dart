@@ -1,18 +1,11 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geocoding/geocoding.dart' as geoCo;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'event.dart';
-import 'firebase_options.dart';
 import 'dart:developer';
-import 'dart:ui' as ui;
-
-
 
 class MapDetails extends StatefulWidget {
   const MapDetails({Key? key}) : super(key: key);
@@ -25,27 +18,22 @@ class _MapDetailsState extends State<MapDetails> {
   final Completer<GoogleMapController> _controller = Completer();
   LocationData? currentLocation;
 
-
   LatLng sourceLocation = const LatLng(43.4691, 79.7000);
   final TextEditingController _source = TextEditingController();
   final TextEditingController _destination = TextEditingController();
 
-  Map<MarkerId, Marker> markers = <MarkerId,Marker>{};
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-
-  void placeMarkers(double lat, double long){
+  void placeMarkersTap(double lat, double long) {
     MarkerId markerId = MarkerId(lat.toString() + long.toString());
 
     Marker _marker = Marker(
         markerId: markerId,
-        position: LatLng(lat,long),
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueCyan
-        ),
-        infoWindow: const InfoWindow(title:'Address')
-    );
+        position: LatLng(lat, long),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
+        onTap: () => _create());
 
-    setState((){
+    setState(() {
       markers[markerId] = _marker;
     });
   }
@@ -61,26 +49,21 @@ class _MapDetailsState extends State<MapDetails> {
       googleMapController.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
               target: LatLng(newLoc.latitude!, newLoc.longitude!), zoom: 16)));
-      // Remove any existing 'current' marker from the map
-      markers.remove(const MarkerId("current"));
-      // Add the new 'current' marker to the map
 
+      /* this is specifically for the current location marker*/
+      markers.remove(const MarkerId("current"));
       markers[const MarkerId("current")] = Marker(
-        markerId: const MarkerId("current"),
-        position: LatLng(newLoc.latitude!, newLoc.longitude!),
-          icon: await BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(),
-            'assets/images/main.png',
-          ),
-        infoWindow:
-          const InfoWindow(title: 'hello!')
-      );
+          markerId: const MarkerId("current"),
+          position: LatLng(newLoc.latitude!, newLoc.longitude!),
+          icon:
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+          infoWindow: const InfoWindow(title: 'hello!'));
 
       setState(() {});
     });
   }
 
-  populateClients() {
+  void getMarkersFromFireStore() {
     FirebaseFirestore.instance.collection("markers").get().then((docs) {
       if (docs.docs.isNotEmpty) {
         for (int i = 0; i < docs.docs.length; ++i) {
@@ -90,19 +73,15 @@ class _MapDetailsState extends State<MapDetails> {
     });
   }
 
-  void initMarker(doc, docId) async{
+  void initMarker(doc, docId) async {
     log('initMarker called');
     var markerIdVal = docId;
     final MarkerId markerId = MarkerId(markerIdVal);
 
     final Marker marker = Marker(
       markerId: markerId,
-      position: LatLng(
-          doc['location'].latitude, doc['location'].longitude
-      ),
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueCyan
-      ),
+      position: LatLng(doc['location'].latitude, doc['location'].longitude),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
     );
     setState(() {
       markers[markerId] = marker;
@@ -110,10 +89,11 @@ class _MapDetailsState extends State<MapDetails> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     getCurrentLocation();
-    populateClients();
+    getMarkersFromFireStore();
+
   }
 
   @override
@@ -134,33 +114,32 @@ class _MapDetailsState extends State<MapDetails> {
         body: currentLocation == null
             ? const Center(child: Text("Loading... Please wait!"))
             : GoogleMap(
-          zoomControlsEnabled: false,
-          initialCameraPosition: CameraPosition(
-            target: LatLng(currentLocation!.latitude!,
-                currentLocation!.longitude!),
-            zoom: 13.5,
-          ),
-          onTap: (tapped) async{
-            placeMarkers(tapped.latitude, tapped.longitude);
+                zoomControlsEnabled: false,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(
+                      currentLocation!.latitude!, currentLocation!.longitude!),
+                  zoom: 13.5,
+                ),
+                onTap: (tapped) async {
+                  placeMarkersTap(tapped.latitude, tapped.longitude);
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PinEvent()),
-            );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PinEvent()),
+                  );
 
-            await FirebaseFirestore.instance
-                .collection('markers')
-                .add({
-              'location': GeoPoint(tapped.latitude, tapped.longitude),
-              'iconHue': 'hueCyan',
-            });
-          },
-          markers: Set<Marker>.of(markers.values),
-          onMapCreated: (mapController) {
-            //change map camera position according to the location change
-            _controller.complete(mapController);
-          },
-        ),
+                  //ToDo:THIS IS WHAT'S BEING PUSHED TO DATABASE ON TAP
+                  await FirebaseFirestore.instance.collection('markers').add({
+                    'location': GeoPoint(tapped.latitude, tapped.longitude),
+                    'iconHue': 'hueCyan',
+                  });
+                },
+                markers: Set<Marker>.of(markers.values),
+                onMapCreated: (mapController) {
+                  //change map camera position according to the location change
+                  _controller.complete(mapController);
+                },
+              ),
         floatingActionButton: Padding(
           padding: const EdgeInsets.only(right: 10.0, bottom: 110.0),
           child: FloatingActionButton(
@@ -170,7 +149,7 @@ class _MapDetailsState extends State<MapDetails> {
           ),
         ),
         floatingActionButtonLocation:
-        FloatingActionButtonLocation.miniEndFloat);
+            FloatingActionButtonLocation.miniEndFloat);
   }
 
   Widget _getCustomPin() {
@@ -198,47 +177,61 @@ class _MapDetailsState extends State<MapDetails> {
                 right: 20,
                 bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextField(
-                  controller: _source,
-                  decoration: const InputDecoration(labelText: 'Your Location'),
-                ),
-                TextField(
-                  // keyboardType:
-                  //     const TextInputType.text,
-                  controller: _destination,
-                  decoration: const InputDecoration(
-                    labelText: 'Destination',
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  child: Image.asset(
+                    //ToDo: REPLACE THIS IMAGE WITH USER URL
+                    'assets/images/test.jpeg',
+                    width: double.infinity,
+                    height: 150,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: ElevatedButton(
-                    child: const Text('Create'),
-                    onPressed: () async {
-                      List<geoCo.Location> locations1 =
-                      await geoCo.locationFromAddress(_source.text);
-                      List<geoCo.Location> locations2 =
-                      await geoCo.locationFromAddress(_destination.text);
-                      setState(() {
-                          sourceLocation = LatLng(
-                              locations1[0].latitude, locations1[0].longitude);
-                          // destination = LatLng(
-                        //       locations2[0].latitude, locations2[0].longitude);
-                      });
-                      _source.clear();
-                      _destination.clear();
-                      Navigator.of(context).pop();
-                    },
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Center(
+                      child: Text(
+                        //ToDo:REPLACE THIS WITH PIN TITLE
+                        //ToDo: LIMIT CHARACTERS
+                        'Pin Title',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      ),
+                      SizedBox(height: 8),
+                      //ToDo: Pin type here; we can change colour corresponding to theme
+                      //ToDo: remove this if too complicated
+                      Text('Pin type:${1010101}'),
+                      SizedBox(height: 8),
+                      Text('Description:${101010}'),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
+          ),
+          ]
+          ),
           );
-        });
+        }
+    );
   }
 }
