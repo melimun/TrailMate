@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:trailmate/tracking_screen.dart';
+import 'package:trailmate/map_details.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyMap extends StatefulWidget {
+  const MyMap({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyMap> createState() => _MyMapState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyMapState extends State<MyMap> {
   Location location = Location();
   LocationData? currentLocation;
   void getCurrentLocation() {
-    //location.enableBackgroundMode(enable: true);
-
     location.getLocation().then((location) {
       setState(() {
         currentLocation = location;
-        // sourceLocation =
-        //     LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
-        // destination =
-        //     LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
       });
     });
   }
@@ -35,19 +26,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const TrackingScreen(),
+      home: const MapDetails(),
     );
   }
 }
