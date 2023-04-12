@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:trailmate/tracking_screen.dart';
+import 'package:camera/camera.dart';
 
-void main() { //try bringing camera from map, tracking screen, event then camera
-  runApp(const MyApp());
+Future<void> main() async {
+  //try bringing camera from map, tracking screen, event then camera
+  WidgetsFlutterBinding.ensureInitialized();
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  final firstCamera = cameras.first;
+
+  runApp(MyApp(firstCamera));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp(this.camera);
+  final CameraDescription camera;
+
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<StatefulWidget> createState() {
+    return _MyAppState(camera);
+  }
 }
 
 class _MyAppState extends State<MyApp> {
+  _MyAppState(this.camera);
+  final CameraDescription camera;
+
   Location location = Location();
   LocationData? currentLocation;
   void getCurrentLocation() {
@@ -47,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const TrackingScreen(),
+      home: TrackingScreen(camera),
     );
   }
 }

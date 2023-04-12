@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
+
   WidgetsFlutterBinding.ensureInitialized();
 
   // Obtain a list of the available cameras on the device.
@@ -32,6 +33,7 @@ class TakePictureScreen extends StatefulWidget {
     super.key,
     required this.camera,
   });
+
 
   final CameraDescription camera;
 
@@ -137,3 +139,4 @@ class DisplayPictureScreen extends StatelessWidget {
     );
   }
 }
+

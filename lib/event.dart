@@ -11,12 +11,20 @@ import 'dart:io';
 
 
 
+
+
 class PinEvent extends StatelessWidget {
-  final typeOfEventsController = TextEditingController();
+  PinEvent(this.camera);
 
-  final nameController = TextEditingController();
+  final CameraDescription camera;
 
-  final descriptionController = TextEditingController();
+
+  TextEditingController typeOfEventsController = TextEditingController();
+
+  TextEditingController nameController = TextEditingController();
+
+  TextEditingController descriptionController = TextEditingController();
+
 
 // Obtain a list of the available cameras on the device.
 
@@ -65,11 +73,11 @@ class PinEvent extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },),
-            FloatingActionButton(
+            TextButton(
               child: const Text('Go To Camera'),
               onPressed: () {
-                MaterialPageRoute(
-                  builder: (context) => TakePictureScreen(camera: ),
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => TakePictureScreen(camera: camera),)
                 );
               },),
 

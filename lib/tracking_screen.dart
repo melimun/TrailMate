@@ -8,15 +8,19 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:trailmate/.env.dart';
 import 'package:trailmate/event.dart';
+import 'package:camera/camera.dart';
 
 class TrackingScreen extends StatefulWidget {
-  const TrackingScreen({Key? key}) : super(key: key);
+  const TrackingScreen(this.camera ,{Key? key}) : super(key: key);
+  final CameraDescription camera;
 
   @override
-  State<TrackingScreen> createState() => _TrackingScreenState();
+  State<TrackingScreen> createState() => _TrackingScreenState(camera);
 }
 
 class _TrackingScreenState extends State<TrackingScreen> {
+  _TrackingScreenState(this.camera);
+  final CameraDescription camera;
   final Completer<GoogleMapController> _controller = Completer();
 
   LatLng sourceLocation = LatLng(23.847879799999998, 90.2575646);
@@ -63,7 +67,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PinEvent(),
+        builder: (context) => PinEvent(camera),
       ),
     );
     setState(() {
