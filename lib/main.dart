@@ -97,9 +97,9 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                     return Column(
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Padding(
-                            padding: const EdgeInsets.all(32.0),
+                            padding: const EdgeInsets.all(50.0),
                             child: Image.asset(
                               item.imageUrl,
                             ),
@@ -111,7 +111,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                               Padding(
                                 padding: const EdgeInsets.all(0.0),
                                 child: Text(item.title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 23.5
                                 ),
@@ -124,7 +124,7 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                                     horizontal: 24.0, vertical: 8.0),
                                 child: Text(item.description,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18,
                                     )),
                               )

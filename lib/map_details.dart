@@ -55,8 +55,7 @@ class _MapDetailsState extends State<MapDetails> {
       markers[const MarkerId("current")] = Marker(
           markerId: const MarkerId("current"),
           position: LatLng(newLoc.latitude!, newLoc.longitude!),
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
           infoWindow: const InfoWindow(title: 'hello!'));
 
       setState(() {});
@@ -118,7 +117,7 @@ class _MapDetailsState extends State<MapDetails> {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                       currentLocation!.latitude!, currentLocation!.longitude!),
-                  zoom: 13.5,
+                  zoom: 20,
                 ),
                 onTap: (tapped) async {
                   placeMarkersTap(tapped.latitude, tapped.longitude);
@@ -140,16 +139,7 @@ class _MapDetailsState extends State<MapDetails> {
                   _controller.complete(mapController);
                 },
               ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(right: 10.0, bottom: 110.0),
-          child: FloatingActionButton(
-            onPressed: () => _create(),
-            backgroundColor: const Color(0xff79a666),
-            child: _getCustomPin(),
-          ),
-        ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniEndFloat);
+        );
   }
 
   Widget _getCustomPin() {
@@ -157,7 +147,7 @@ class _MapDetailsState extends State<MapDetails> {
       child: SizedBox(
         width: 150,
         child: Icon(
-          Icons.person,
+          Icons.room,
           color: Colors.white,
           size: 30.0,
         ),
