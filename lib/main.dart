@@ -8,15 +8,17 @@ import 'model/OnboardingPage.dart';
 //* Utilized flutter template for main page *//
 
 Future<void> main() async {
-  runApp(MyApp());
+  runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
-  Widget build(BuildContext contextP) {
+  Widget build(BuildContext context) {
     return const MaterialApp(
         debugShowCheckedModeBanner: false, home: OnboardFirstPage());
   }

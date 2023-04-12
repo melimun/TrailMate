@@ -24,6 +24,7 @@ class _MapDetailsState extends State<MapDetails> {
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
+  // Responsible for: creating markers when user taps; onTap() => dialog box
   void placeMarkersTap(double lat, double long) {
     MarkerId markerId = MarkerId(lat.toString() + long.toString());
 
@@ -31,13 +32,14 @@ class _MapDetailsState extends State<MapDetails> {
         markerId: markerId,
         position: LatLng(lat, long),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
-        onTap: () => _create());
+        onTap: () => createEventDialog());
 
     setState(() {
       markers[markerId] = _marker;
     });
   }
 
+  //Receives current location of user to use for Camera Position
   void getCurrentLocation() async {
     Location location = Location();
     location
@@ -50,7 +52,7 @@ class _MapDetailsState extends State<MapDetails> {
           CameraPosition(
               target: LatLng(newLoc.latitude!, newLoc.longitude!), zoom: 16)));
 
-      /* this is specifically for the current location marker*/
+      /* this is a marker specifically for the current location marker*/
       markers.remove(const MarkerId("current"));
       markers[const MarkerId("current")] = Marker(
           markerId: const MarkerId("current"),
@@ -62,6 +64,7 @@ class _MapDetailsState extends State<MapDetails> {
     });
   }
 
+  //Receives Markers from FireStore
   void getMarkersFromFireStore() {
     FirebaseFirestore.instance.collection("markers").get().then((docs) {
       if (docs.docs.isNotEmpty) {
@@ -72,6 +75,7 @@ class _MapDetailsState extends State<MapDetails> {
     });
   }
 
+  //Initializes Markers to appear on the map
   void initMarker(doc, docId) async {
     log('initMarker called');
     var markerIdVal = docId;
@@ -120,6 +124,8 @@ class _MapDetailsState extends State<MapDetails> {
                   zoom: 20,
                 ),
                 onTap: (tapped) async {
+                  /* This is responsible for: Placing the tapped markers, and then pushing to event page.
+                  It is also responsible for sending the tapped data to Firestore */
                   placeMarkersTap(tapped.latitude, tapped.longitude);
 
                   Navigator.push(
@@ -142,20 +148,8 @@ class _MapDetailsState extends State<MapDetails> {
         );
   }
 
-  Widget _getCustomPin() {
-    return const Center(
-      child: SizedBox(
-        width: 150,
-        child: Icon(
-          Icons.room,
-          color: Colors.white,
-          size: 30.0,
-        ),
-      ),
-    );
-  }
-
-  Future<void> _create() async {
+  //This creates the event dialog that the user sees when they tap an existing marker
+  Future<void> createEventDialog() async {
     await showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -178,7 +172,7 @@ class _MapDetailsState extends State<MapDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
                   ),
