@@ -2,22 +2,12 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trailmate/camera.dart';
-import 'package:camera/camera.dart';
-
-import 'dart:async';
-import 'dart:io';
-
 import 'package:trailmate/gallery_access.dart';
-import 'package:trailmate/main.dart';
 import 'package:trailmate/map_details.dart';
 
 
 
 class PinEvent extends StatelessWidget {
-  PinEvent(this.camera);
-
-  final CameraDescription camera;
-
 
   TextEditingController typeOfEventsController = TextEditingController();
 
@@ -72,25 +62,12 @@ class PinEvent extends StatelessWidget {
               width: 300,
               child: TextField(decoration: const InputDecoration(labelText: "description", contentPadding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),),
                 controller: descriptionController,
-               // onChanged: (description) => descriptionController.text = description,
+                // onChanged: (description) => descriptionController.text = description,
               ),
             ),
-        Container(
-          margin: const EdgeInsets.only(top: 15.0),
-          child: TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.all(8.0),
-              textStyle: const TextStyle(fontSize: 20),
+            Container(
+              margin: const EdgeInsets.only(top: 15.0),
             ),
-            child: const Text('Go back'),
-            onPressed: () {
-              // Navigator.pop(context);
-              Navigator.of(context).pop(MaterialPageRoute(
-                  builder: (BuildContext context) => MapDetails(camera, nameController.text, typeOfEventsController.text, descriptionController.text)));
-            },),
-        ),
 
             TextButton(
               style: TextButton.styleFrom(
@@ -99,20 +76,7 @@ class PinEvent extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 textStyle: const TextStyle(fontSize: 20),
               ),
-              child: const Text('Go To Camera'),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => TakePictureScreen(camera: camera),)
-                );
-              },),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.all(8.0),
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text('View Gallery'),
+              child: const Text('Add Photo'),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => GalleryAccess()));

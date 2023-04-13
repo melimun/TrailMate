@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class GalleryAccess extends StatefulWidget {
   const GalleryAccess({super.key});
 
@@ -55,7 +54,15 @@ class _GalleryAccessState extends State<GalleryAccess> {
                     textScaleFactor: 3,
                     style: TextStyle(color: Colors.green),
                   ),
-                )
+                ),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                    child: const Text('Submit'),
+                    onPressed: () {
+
+                    }),
               ],
             ),
           );
@@ -84,9 +91,7 @@ class _GalleryAccessState extends State<GalleryAccess> {
               ListTile(
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
-                onTap: () {
-                  getImage(ImageSource.camera);
-                  Navigator.of(context).pop();
+                onTap: () async {
                 },
               ),
             ],
@@ -97,12 +102,12 @@ class _GalleryAccessState extends State<GalleryAccess> {
   }
 
   Future getImage(
-      ImageSource img,
-      ) async {
+    ImageSource img,
+  ) async {
     final pickedFile = await picker.pickImage(source: img);
     XFile? xfilePick = pickedFile;
     setState(
-          () {
+      () {
         if (xfilePick != null) {
           galleryFile = File(pickedFile!.path);
         } else {

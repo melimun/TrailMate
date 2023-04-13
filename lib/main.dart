@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:trailmate/.env.dart';
@@ -9,6 +10,9 @@ import 'model/OnboardingPage.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -46,7 +50,7 @@ class OnboardFirstPage extends StatelessWidget {
         OnboardingPageModel(
           title: 'It\'s Easy-Peasy!',
           description:
-              'All you need to do is tap on the map and enter your information!',
+          'All you need to do is tap on the map and enter your information!',
           imageUrl: 'assets/images/onboard3.png',
           bgColor: primaryBrown,
         ),
@@ -113,15 +117,15 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                               Padding(
                                 padding: const EdgeInsets.all(0.0),
                                 child: Text(item.title,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 23.5
-                                ),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23.5
+                                  ),
                                 ),
                               ),
                               Container(
                                 constraints:
-                                    const BoxConstraints(maxWidth: 280),
+                                const BoxConstraints(maxWidth: 280),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 24.0, vertical: 8.0),
                                 child: Text(item.description,
@@ -142,16 +146,16 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: widget.pages
                     .map((item) => AnimatedContainer(
-                          duration: const Duration(milliseconds: 250),
-                          width: _currentPage == widget.pages.indexOf(item)
-                              ? 30
-                              : 8,
-                          height: 8,
-                          margin: const EdgeInsets.all(2.0),
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10.0)),
-                        ))
+                  duration: const Duration(milliseconds: 250),
+                  width: _currentPage == widget.pages.indexOf(item)
+                      ? 30
+                      : 8,
+                  height: 8,
+                  margin: const EdgeInsets.all(2.0),
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10.0)),
+                ))
                     .toList(),
               ),
               // Bottom buttons
@@ -192,4 +196,3 @@ class _OnboardingPageState extends State<OnboardingPagePresenter> {
     );
   }
 }
-
