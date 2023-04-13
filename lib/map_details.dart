@@ -9,19 +9,30 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 
 class MapDetails extends StatefulWidget {
-  const MapDetails(this.camera, {Key? key}) : super(key: key);
+  const MapDetails(this.camera, this.name,this.type,this.description ,{Key? key}) : super(key: key);
 
   final CameraDescription camera;
 
+  //variables to receive the inputs from event
+  final String name;
+  final String type;
+  final String description;
+
   @override
-  State<MapDetails> createState() => _MapDetailsState(camera);
+  State<MapDetails> createState() => _MapDetailsState(camera,name,type,description);
 }
 
 class _MapDetailsState extends State<MapDetails> {
-  _MapDetailsState(this.camera);
+  _MapDetailsState(this.camera, this.name,this.type,this.description);
   final Completer<GoogleMapController> _controller = Completer();
   LocationData? currentLocation;
+
   final CameraDescription camera;
+
+  //variables to receive the inputs from event
+  final String name;
+  final String type;
+  final String description;
 
 
   LatLng sourceLocation = const LatLng(43.4691, 79.7000);
@@ -142,7 +153,7 @@ class _MapDetailsState extends State<MapDetails> {
                   //ToDo:THIS IS WHAT'S BEING PUSHED TO DATABASE ON TAP
                   await FirebaseFirestore.instance.collection('markers').add({
                     'location': GeoPoint(tapped.latitude, tapped.longitude),
-                    'iconHue': 'hueCyan',
+                    'iconHue': 'hueCyan', //put the name, type and description here
                   });
                 },
                 markers: Set<Marker>.of(markers.values),

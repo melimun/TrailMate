@@ -33,7 +33,7 @@ class _GalleryAccessState extends State<GalleryAccess> {
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.green)),
-                  child: const Text('Select Image from Gallery and Camera'),
+                  child: const Text('Select Image from Gallery or Camera'),
                   onPressed: () {
                     _showPicker(context: context);
                   },
@@ -51,7 +51,7 @@ class _GalleryAccessState extends State<GalleryAccess> {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 18.0),
                   child: Text(
-                    "GFG",
+                    "Event Image",
                     textScaleFactor: 3,
                     style: TextStyle(color: Colors.green),
                   ),

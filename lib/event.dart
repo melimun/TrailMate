@@ -8,6 +8,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:trailmate/gallery_access.dart';
+import 'package:trailmate/main.dart';
+import 'package:trailmate/map_details.dart';
 
 
 
@@ -26,14 +28,10 @@ class PinEvent extends StatelessWidget {
 
 // Obtain a list of the available cameras on the device.
 
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    typeOfEventsController.dispose();
-    nameController.dispose();
-    descriptionController.dispose();
-    //super.dispose();
-  }
+
+
+
+
 
 
 // Get a specific camera from the list of available cameras.
@@ -59,33 +57,41 @@ class PinEvent extends StatelessWidget {
           children: [
             SizedBox(
               width: 300,
-              child: TextField(decoration: const InputDecoration(labelText: "name of event") ,
+              child: TextField(decoration: const InputDecoration(labelText: "name of event", contentPadding: EdgeInsets.symmetric(vertical: 30, horizontal: 5)) ,
                 controller: nameController,
               ),
             ),
             SizedBox(
               width: 300,
-              child: TextField(decoration: const InputDecoration(labelText: "type of event", contentPadding: EdgeInsets.symmetric(vertical: 40),),
+              child: TextField(decoration: const InputDecoration(labelText: "type of event", contentPadding: EdgeInsets.symmetric(vertical: 30, horizontal: 5)),
                 controller: typeOfEventsController,
+                //onChanged: (event) => typeOfEventsController.text = event,
               ),
             ),
             SizedBox(
               width: 300,
-              child: TextField(decoration: const InputDecoration(labelText: "description", contentPadding: EdgeInsets.symmetric(vertical: 40),),
+              child: TextField(decoration: const InputDecoration(labelText: "description", contentPadding: EdgeInsets.symmetric(vertical: 30, horizontal: 5),),
                 controller: descriptionController,
+               // onChanged: (description) => descriptionController.text = description,
               ),
             ),
-        TextButton(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.black,
-            padding: const EdgeInsets.all(8.0),
-            textStyle: const TextStyle(fontSize: 20),
-          ),
-        child: const Text('Go back'),
-        onPressed: () {
-          Navigator.pop(context);
-        },),
+        Container(
+          margin: const EdgeInsets.only(top: 15.0),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.black,
+              padding: const EdgeInsets.all(8.0),
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            child: const Text('Go back'),
+            onPressed: () {
+              // Navigator.pop(context);
+              Navigator.of(context).pop(MaterialPageRoute(
+                  builder: (BuildContext context) => MapDetails(camera, nameController.text, typeOfEventsController.text, descriptionController.text)));
+            },),
+        ),
+
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
@@ -106,23 +112,11 @@ class PinEvent extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 textStyle: const TextStyle(fontSize: 20),
               ),
-              child: const Text('Save Info'),
-              onPressed: () {
-              },),
-
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.all(8.0),
-                textStyle: const TextStyle(fontSize: 20),
-              ),
               child: const Text('View Gallery'),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => GalleryAccess()));
               },),
-
           ],
         ),
       ),
