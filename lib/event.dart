@@ -14,9 +14,7 @@ import 'package:trailmate/map_details.dart';
 
 
 class PinEvent extends StatelessWidget {
-  PinEvent(this.camera);
-
-  final CameraDescription camera;
+  PinEvent();
 
 
   TextEditingController typeOfEventsController = TextEditingController();
@@ -27,10 +25,6 @@ class PinEvent extends StatelessWidget {
 
 
 // Obtain a list of the available cameras on the device.
-
-
-
-
 
 
 
@@ -88,23 +82,10 @@ class PinEvent extends StatelessWidget {
             onPressed: () {
               // Navigator.pop(context);
               Navigator.of(context).pop(MaterialPageRoute(
-                  builder: (BuildContext context) => MapDetails(camera, nameController.text, typeOfEventsController.text, descriptionController.text)));
+                  builder: (BuildContext context) => MapDetails()));
             },),
         ),
 
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.all(8.0),
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text('Go To Camera'),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => TakePictureScreen(camera: camera),)
-                );
-              },),
             TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,

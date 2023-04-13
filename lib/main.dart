@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:trailmate/.env.dart';
-import 'package:trailmate/map.dart';
+import 'package:trailmate/MyMap.dart';
 import 'firebase_options.dart';
 import 'model/OnboardingPage.dart';
+import 'package:camera/camera.dart';
 
 //* Utilized flutter template for main page *//
 
 Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  final firstCamera = cameras.first;
+
   runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

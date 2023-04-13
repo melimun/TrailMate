@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:trailmate/map_details.dart';
 import 'package:trailmate/tracking_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyMap());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyMap extends StatefulWidget {
+  const MyMap({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyMap> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyMap> {
   Location location = Location();
   LocationData? currentLocation;
   void getCurrentLocation() {
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const TrackingScreen(),
+      home: const MapDetails(),
     );
   }
 }
