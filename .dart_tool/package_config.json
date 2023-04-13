@@ -21,9 +21,9 @@
     },
     {
       "name": "camera",
-      "rootUri": "file:///Users/christian/.pub-cache/hosted/pub.dev/camera-0.10.3+2",
+      "rootUri": "file:///Users/christian/.pub-cache/hosted/pub.dev/camera-0.10.4",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.18"
     },
     {
       "name": "camera_android",
@@ -494,7 +494,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-13T01:46:37.791531Z",
+  "generated": "2023-04-13T03:14:26.477495Z",
   "generator": "pub",
   "generatorVersion": "2.19.2"
 }
