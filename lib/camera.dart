@@ -101,18 +101,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         child: const Icon(Icons.camera_alt),
       ),
 
-      child: TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.black,
-          padding: const EdgeInsets.all(8.0),
-          textStyle: const TextStyle(fontSize: 20),
-        ),
-        child: const Text('View Gallety '),
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => GalleryAccess()));
-        },),
+
 
 
 

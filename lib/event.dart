@@ -110,6 +110,19 @@ class PinEvent extends StatelessWidget {
               onPressed: () {
               },),
 
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.all(8.0),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text('View Gallery'),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => GalleryAccess()));
+              },),
+
           ],
         ),
       ),
