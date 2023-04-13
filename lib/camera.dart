@@ -6,15 +6,12 @@ import 'package:flutter/material.dart';
 
 import 'gallery_access.dart';
 
-
-
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
     super.key,
     required this.camera,
   });
-
 
   final CameraDescription camera;
 
@@ -100,12 +97,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         },
         child: const Icon(Icons.camera_alt),
       ),
-
-
-
-
-
-
 
     );
   }

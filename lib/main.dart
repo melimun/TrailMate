@@ -10,12 +10,6 @@ import 'package:camera/camera.dart';
 
 Future<void> main() async {
 
-  WidgetsFlutterBinding.ensureInitialized();
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  final firstCamera = cameras.first;
-
   runApp(const MyApp());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

@@ -10,12 +10,11 @@ import 'dart:io';
 import 'package:trailmate/gallery_access.dart';
 import 'package:trailmate/main.dart';
 import 'package:trailmate/map_details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
 class PinEvent extends StatelessWidget {
-  PinEvent();
-
 
   TextEditingController typeOfEventsController = TextEditingController();
 
@@ -23,10 +22,7 @@ class PinEvent extends StatelessWidget {
 
   TextEditingController descriptionController = TextEditingController();
 
-
 // Obtain a list of the available cameras on the device.
-
-
 
 // Get a specific camera from the list of available cameras.
 // inputs, type of events, name of event, description and photo
@@ -69,6 +65,7 @@ class PinEvent extends StatelessWidget {
                // onChanged: (description) => descriptionController.text = description,
               ),
             ),
+
         Container(
           margin: const EdgeInsets.only(top: 15.0),
           child: TextButton(
@@ -98,9 +95,25 @@ class PinEvent extends StatelessWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => GalleryAccess()));
               },),
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.all(8.0),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text('Save Info'),
+              onPressed: () async {
+                await FirebaseFirestore.instance.collection('events').add({
+                  'eventName': nameController.text,
+                  'eventType': typeOfEventsController.text,
+                  'eventDescription': descriptionController.text,
+                });
+              },)
           ],
         ),
       ),
+
     );
   }
 }
