@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'event.dart';
 import 'dart:developer';
+<<<<<<< HEAD
 import 'package:camera/camera.dart';
 
 class MapDetails extends StatefulWidget {
@@ -35,6 +36,20 @@ class _MapDetailsState extends State<MapDetails> {
   final String description;
 
 
+=======
+
+class MapDetails extends StatefulWidget {
+  const MapDetails({Key? key}) : super(key: key);
+
+  @override
+  State<MapDetails> createState() => _MapDetailsState();
+}
+
+class _MapDetailsState extends State<MapDetails> {
+  final Completer<GoogleMapController> _controller = Completer();
+  LocationData? currentLocation;
+
+>>>>>>> origin/google_map
   LatLng sourceLocation = const LatLng(43.4691, 79.7000);
   final TextEditingController _source = TextEditingController();
   final TextEditingController _destination = TextEditingController();
@@ -147,13 +162,21 @@ class _MapDetailsState extends State<MapDetails> {
 
                   Navigator.push(
                     context,
+<<<<<<< HEAD
                     MaterialPageRoute(builder: (context) => PinEvent(camera)),
+=======
+                    MaterialPageRoute(builder: (context) => PinEvent()),
+>>>>>>> origin/google_map
                   );
 
                   //ToDo:THIS IS WHAT'S BEING PUSHED TO DATABASE ON TAP
                   await FirebaseFirestore.instance.collection('markers').add({
                     'location': GeoPoint(tapped.latitude, tapped.longitude),
+<<<<<<< HEAD
                     'iconHue': 'hueCyan', //put the name, type and description here
+=======
+                    'iconHue': 'hueCyan',
+>>>>>>> origin/google_map
                   });
                 },
                 markers: Set<Marker>.of(markers.values),
