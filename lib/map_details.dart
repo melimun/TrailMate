@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,16 +14,13 @@ class MapDetails extends StatefulWidget {
   State<MapDetails> createState() => _MapDetailsState();
 }
 
-
 class _MapDetailsState extends State<MapDetails> {
-
   final Completer<GoogleMapController> _controller = Completer();
   LocationData? currentLocation;
 
   LatLng sourceLocation = const LatLng(43.4691, 79.7000);
   final TextEditingController _source = TextEditingController();
   final TextEditingController _destination = TextEditingController();
-
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 

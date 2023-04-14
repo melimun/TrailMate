@@ -79,7 +79,19 @@ class PinEvent extends StatelessWidget {
               child: const Text('Add Photo'),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => GalleryAccess()));
+                    builder: (BuildContext context) => const GalleryAccess()));
+              },),
+
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.all(8.0),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text('Go Back'),
+              onPressed: () {
+                Navigator.pop(context);
               },),
           ],
         ),

@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trailmate/event.dart';
+
+import 'map_details.dart';
 
 class GalleryAccess extends StatefulWidget {
   const GalleryAccess({super.key});
@@ -13,6 +18,9 @@ class GalleryAccess extends StatefulWidget {
 class _GalleryAccessState extends State<GalleryAccess> {
   File? galleryFile;
   final picker = ImagePicker();
+  final _storage = FirebaseStorage.instance;
+  PickedFile? image;
+
   @override
   Widget build(BuildContext context) {
     //display image selected from gallery
@@ -50,7 +58,7 @@ class _GalleryAccessState extends State<GalleryAccess> {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 18.0),
                   child: Text(
-                    "Event Image",
+                    "Nice Picture!",
                     textScaleFactor: 3,
                     style: TextStyle(color: Colors.green),
                   ),
@@ -59,9 +67,9 @@ class _GalleryAccessState extends State<GalleryAccess> {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green)),
-                    child: const Text('Submit'),
+                    child: const Text('Go Back'),
                     onPressed: () {
-
+                      Navigator.pop(context);
                     }),
               ],
             ),
@@ -83,8 +91,23 @@ class _GalleryAccessState extends State<GalleryAccess> {
               ListTile(
                 leading: const Icon(Icons.photo_library),
                 title: const Text('Photo Library'),
-                onTap: () {
-                  getImage(ImageSource.gallery);
+                onTap: () async {
+                  image = await picker.getImage(source: ImageSource.gallery);
+                  setState(() {
+                    galleryFile = File(image!.path);
+                  });
+                  var file = File(image!.path);
+                  //Upload to Firebase
+                  var snapshot = await _storage
+                      .ref()
+                      .child('folderName/imageName')
+                      .putFile(file);
+
+                  var downloadUrl = await snapshot.ref.getDownloadURL();
+
+                  await FirebaseFirestore.instance.collection('image').add({
+                    'imageURL': downloadUrl
+                  });
                   Navigator.of(context).pop();
                 },
               ),
@@ -92,6 +115,23 @@ class _GalleryAccessState extends State<GalleryAccess> {
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
                 onTap: () async {
+                  image = await picker.getImage(source: ImageSource.camera);
+                  var file = File(image!.path);
+                  setState(() {
+                    galleryFile = File(image!.path);
+                  });
+                  //Upload to Firebase
+                  var snapshot = await _storage
+                      .ref()
+                      .child('folderName/dog')
+                      .putFile(file);
+
+                  var downloadUrl = await snapshot.ref.getDownloadURL();
+
+                  await FirebaseFirestore.instance.collection('image').add({
+                    'imageURL': downloadUrl
+                  });
+                  Navigator.of(context).pop();
                 },
               ),
             ],
