@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trailmate/camera.dart';
@@ -93,6 +94,22 @@ class PinEvent extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },),
+
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.all(8.0),
+                textStyle: const TextStyle(fontSize: 20),
+              ),
+              child: const Text('Save Info'),
+              onPressed: () async {
+                await FirebaseFirestore.instance.collection('events').add({
+                  'eventName': nameController.text,
+                  'eventType': typeOfEventsController.text,
+                  'eventDescription': descriptionController.text,
+                });
+              },)
           ],
         ),
       ),

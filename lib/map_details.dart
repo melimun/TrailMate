@@ -19,8 +19,6 @@ class _MapDetailsState extends State<MapDetails> {
   LocationData? currentLocation;
 
   LatLng sourceLocation = const LatLng(43.4691, 79.7000);
-  final TextEditingController _source = TextEditingController();
-  final TextEditingController _destination = TextEditingController();
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
@@ -177,7 +175,6 @@ class _MapDetailsState extends State<MapDetails> {
                             topRight: Radius.circular(16),
                           ),
                           child: Image.asset(
-                            //ToDo: REPLACE THIS IMAGE WITH USER URL
                             'assets/images/test.jpeg',
                             width: double.infinity,
                             height: 150,
@@ -193,7 +190,7 @@ class _MapDetailsState extends State<MapDetails> {
                                 child: Text(
                                   //ToDo:REPLACE THIS WITH PIN TITLE
                                   //ToDo: LIMIT CHARACTERS
-                                  'Pin Title',
+                                  'a',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -203,9 +200,9 @@ class _MapDetailsState extends State<MapDetails> {
                               SizedBox(height: 8),
                               //ToDo: Pin type here; we can change colour corresponding to theme
                               //ToDo: remove this if too complicated
-                              Text('Pin type:${1010101}'),
+                              Text('Pin type: a'),
                               SizedBox(height: 8),
-                              Text('Description:${101010}'),
+                              Text('Description: a'),
                             ],
                           ),
                         ),
