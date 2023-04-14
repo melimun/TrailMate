@@ -27,6 +27,9 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/location_web-3.1.1" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/cloud_firestore-4.5.1" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/camera-0.10.4" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_storage_web-3.4.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_storage-11.1.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/file_picker-5.2.9" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

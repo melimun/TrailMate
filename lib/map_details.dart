@@ -160,6 +160,10 @@ class _MapDetailsState extends State<MapDetails> {
                     'iconHue': 'hueCyan', //put the name, type and description here
 
                   });
+
+              //    FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+                //  CollectionReference productsRef = rootRef.collection("products");
+                 // Query query = productsRef.whereArrayContains("category", "Soda");
                 },
                 markers: Set<Marker>.of(markers.values),
                 onMapCreated: (mapController) {
