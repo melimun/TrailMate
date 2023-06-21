@@ -44,40 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDtfHnrpfvIZrHIyeHM8N-JHghoO6HP3bE',
-    appId: '1:1076571659298:web:d0c240371c4b716c15be7b',
-    messagingSenderId: '1076571659298',
-    projectId: 'trailmate-8d03b',
-    authDomain: 'trailmate-8d03b.firebaseapp.com',
-    storageBucket: 'trailmate-8d03b.appspot.com',
-    measurementId: 'G-F5V9JWC95X',
+    apiKey: 'YOUR INFO HERE',
+    appId: 'YOUR INFO HERE',
+    messagingSenderId: 'YOUR INFO HERE',
+    projectId: 'YOUR INFO HERE',
+    authDomain: 'YOUR INFO HERE',
+    storageBucket: 'YOUR INFO HERE',
+    measurementId: 'YOUR INFO HERE',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDMnFaJqXUZ496-WWs_Mq2j5Vkk-UVDWAg',
-    appId: '1:1076571659298:android:429b56c3070737d415be7b',
-    messagingSenderId: '1076571659298',
-    projectId: 'trailmate-8d03b',
-    storageBucket: 'trailmate-8d03b.appspot.com',
+    apiKey: 'YOUR INFO HERE',
+    appId: 'YOUR INFO HERE',
+    messagingSenderId: 'YOUR INFO HERE',
+    projectId: 'YOUR INFO HERE',
+    storageBucket: 'YOUR INFO HERE',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDeXrIRlCarvCZ7Sx5ee2iyiPCZHcf0nhE',
-    appId: '1:1076571659298:ios:44e79c15bda3c49415be7b',
-    messagingSenderId: '1076571659298',
-    projectId: 'trailmate-8d03b',
-    storageBucket: 'trailmate-8d03b.appspot.com',
-    iosClientId: '1076571659298-3ko3um08r0irm7qio1jtl3fh48upa5et.apps.googleusercontent.com',
-    iosBundleId: 'munozme.mackechr.sheridan.trailmate',
+    apiKey: 'YOUR INFO HERE',
+    appId: 'YOUR INFO HERE',
+    messagingSenderId: 'YOUR INFO HERE',
+    projectId: 'YOUR INFO HERE',
+    storageBucket: 'YOUR INFO HERE',
+    iosClientId: 'YOUR INFO HERE',
+    iosBundleId: 'YOUR INFO HERE',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDeXrIRlCarvCZ7Sx5ee2iyiPCZHcf0nhE',
-    appId: '1:1076571659298:ios:44e79c15bda3c49415be7b',
-    messagingSenderId: '1076571659298',
-    projectId: 'trailmate-8d03b',
-    storageBucket: 'trailmate-8d03b.appspot.com',
-    iosClientId: '1076571659298-3ko3um08r0irm7qio1jtl3fh48upa5et.apps.googleusercontent.com',
-    iosBundleId: 'munozme.mackechr.sheridan.trailmate',
+    apiKey: 'YOUR INFO HERE',
+    appId: 'YOUR INFO HERE',
+    messagingSenderId: 'YOUR INFO HERE',
+    projectId: 'YOUR INFO HERE',
+    storageBucket: 'YOUR INFO HERE',
+    iosClientId: 'YOUR INFO HERE',
+    iosBundleId: 'YOUR INFO HERE',
   );
 }
